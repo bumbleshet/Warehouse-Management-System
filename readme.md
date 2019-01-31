@@ -1,1 +1,1 @@
-Student Information System
+Warehouse Management System
