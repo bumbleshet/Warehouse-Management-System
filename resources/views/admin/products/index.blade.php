@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <a href="{{ url('/admin/products/create') }}" class="btn btn-success btn-sm" title="Add New Student">
+                        <a href="{{ url('/admin/products/create') }}" class="btn btn-success btn-sm" title="Add New product">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
