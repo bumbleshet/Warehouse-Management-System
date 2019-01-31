@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Edit Course #{{ $course->id }}</div>
+                    <div class="card-header">Create New Section</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/courses') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
@@ -21,14 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($course, [
-                            'method' => 'PATCH',
-                            'url' => ['/admin/courses', $course->id],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                        ]) !!}
+                        {!! Form::open(['url' => '/admin/courses', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin.courses.form', ['formMode' => 'edit'])
+                        @include ('admin.courses.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

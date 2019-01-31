@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class Product extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'departments';
+    protected $table = 'products';
 
     /**
     * The database primary key value.
@@ -25,11 +25,11 @@ class Department extends Model
      *
      * @var array
      */
-    protected $fillable = ['short_code', 'name'];
+    protected $fillable = ['name', 'description', 'section_id'];
 
-    public function courses()
+    public function section()
     {
-        return $this->hasMany('App\Course');
+        return $this->belongsTo('App\Section');
     }
-
+    
 }

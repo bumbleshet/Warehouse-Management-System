@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Course, App\Department, App\Student;
+use App\location;
 use Illuminate\Http\Request;
 
-class CoursesController extends Controller
+class LocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +21,14 @@ class CoursesController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $courses = Course::where('course_code', 'LIKE', "%$keyword%")
-                ->orWhere('course_description', 'LIKE', "%$keyword%")
-                ->orWhere('department_id', 'LIKE', "%$keyword%")
+            $locations = location::where('short_code', 'LIKE', "%$keyword%")
+                ->orWhere('name', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $courses = Course::latest()->paginate($perPage);
+            $locations = location::latest()->paginate($perPage);
         }
 
-        return view('admin.courses.index', compact('courses'));
+        return view('admin.locations.index', compact('locations'));
     }
 
     /**
@@ -39,9 +38,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        $departments = Department::get()->pluck('short_code', 'id');
-
-        return view('admin.courses.create', compact('departments'));
+        return view('admin.locations.create');
     }
 
     /**
@@ -54,14 +51,14 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'course_code' => 'required',
-			'course_description' => 'required'
+			'name' => 'required',
+			'address' => 'required'
 		]);
         $requestData = $request->all();
         
-        Course::create($requestData);
+        location::create($requestData);
 
-        return redirect('admin/courses')->with('flash_message', 'Course added!');
+        return redirect('admin/locations')->with('flash_message', 'location added!');
     }
 
     /**
@@ -73,21 +70,10 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        $course = Course::findOrFail($id);
+        $location = location::findOrFail($id);
 
-        // $students = Course::join('students', 'courses.id', '=', 'students.course_id')
-        //     ->where('courses.id', $id)
-        //     ->get();
-
-        $students = Student::with('course')
-            ->where('course_id', $id)
-            ->get();
-
-        // return $students;
-
-        // return $students;
-
-        return view('admin.courses.show', compact('course'))->with('students', $students);
+        // return $location;
+        return view('admin.locations.show', compact('location'));
     }
 
     /**
@@ -99,9 +85,9 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        $course = Course::findOrFail($id);
+        $location = location::findOrFail($id);
 
-        return view('admin.courses.edit', compact('course'));
+        return view('admin.locations.edit', compact('location'));
     }
 
     /**
@@ -115,15 +101,15 @@ class CoursesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'course_code' => 'required',
-			'course_description' => 'required'
+			'name' => 'required',
+			'address' => 'required'
 		]);
         $requestData = $request->all();
         
-        $course = Course::findOrFail($id);
-        $course->update($requestData);
+        $location = location::findOrFail($id);
+        $location->update($requestData);
 
-        return redirect('admin/courses')->with('flash_message', 'Course updated!');
+        return redirect('admin/locations')->with('flash_message', 'location updated!');
     }
 
     /**
@@ -135,8 +121,8 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        Course::destroy($id);
+        location::destroy($id);
 
-        return redirect('admin/courses')->with('flash_message', 'Course deleted!');
+        return redirect('admin/locations')->with('flash_message', 'location deleted!');
     }
 }

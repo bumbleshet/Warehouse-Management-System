@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Student, App\Course;
+use App\Products, App\Section;
 use Illuminate\Http\Request;
 
-class StudentsController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,15 @@ class StudentsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $students = Student::where('id_number', 'LIKE', "%$keyword%")
-                ->orWhere('first_name', 'LIKE', "%$keyword%")
-                ->orWhere('last_name', 'LIKE', "%$keyword%")
-                ->orWhere('gender', 'LIKE', "%$keyword%")
-                ->orWhere('course_id', 'LIKE', "%$keyword%")
+            $products = Products::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('description', 'LIKE', "%$keyword%")
+                ->orWhere('section_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $students = Student::latest()->paginate($perPage);
+            $products = Products::latest()->paginate($perPage);
         }
 
-        return view('admin.students.index', compact('students'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -41,9 +39,9 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $courses = Course::get()->pluck('course_code', 'id');
+        $sections = Section::get()->pluck('name', 'id');
 
-        return view('admin.students.create', compact('courses'));
+        return view('admin.products.create', compact('sections'));
     }
 
     /**
@@ -62,9 +60,9 @@ class StudentsController extends Controller
         ]);
         $requestData = $request->all();
         
-        Student::create($requestData);
+        Products::create($requestData);
 
-        return redirect('admin/students')->with('flash_message', 'Student added!');
+        return redirect('admin/products')->with('flash_message', 'Products added!');
     }
 
     /**
@@ -76,9 +74,9 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        $student = Student::findOrFail($id);
+        $section = Products::findOrFail($id);
 
-        return view('admin.students.show', compact('student'));
+        return view('admin.products.show', compact('section'));
     }
 
     /**
@@ -90,10 +88,10 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::findOrFail($id);
-        $courses = Course::get()->pluck('course_code', 'id');
+        $section = Products::findOrFail($id);
+        $sections = Section::get()->pluck('name', 'id');
 
-        return view('admin.students.edit', compact('student'))->with('courses', $courses);
+        return view('admin.products.edit', compact('section'))->with('sections', $sections);
     }
 
     /**
@@ -107,16 +105,15 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'id_number' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required'
+            'name' => 'required',
+            'description' => 'required'
         ]);
         $requestData = $request->all();
         
-        $student = Student::findOrFail($id);
-        $student->update($requestData);
+        $section = Products::findOrFail($id);
+        $section->update($requestData);
 
-        return redirect('admin/students')->with('flash_message', 'Student updated!');
+        return redirect('admin/products')->with('flash_message', 'Products updated!');
     }
 
     /**
@@ -128,23 +125,22 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        Student::destroy($id);
+        Products::destroy($id);
 
-        return redirect('admin/students')->with('flash_message', 'Student deleted!');
+        return redirect('admin/products')->with('flash_message', 'Products deleted!');
     }
 
     public function list()
     {
-        $students = Student::get();
+        $products = Products::get();
 
         $return_array = [];
 
-        foreach($students as $student) {
+        foreach($products as $section) {
             $return_array[] = [
-                'id' => $student->id,
-                'id_number' => $student->id_number,
-                'full_name' => $student->full_name,
-                'gender' => ucfirst($student->gender),
+                'id' => $section->id,
+                'name' => $section->name,
+                'description' => $section->description,
             ];
         }
 

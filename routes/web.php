@@ -18,12 +18,12 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function(){
 	Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
 
-	Route::resource('students', 'StudentsController');
+	Route::resource('products', 'ProductsController');
 
-	Route::resource('courses', 'CoursesController');
-	Route::resource('departments', 'DepartmentsController');
+	Route::resource('sections', 'SectionsController');
+	Route::resource('locations', 'LocationsController');
 });
 
 Route::group(['prefix' => 'raw-json-datas'], function(){
-	Route::get('students-list', 'StudentsController@list')->name('students.list');
+	Route::get('products-list', 'ProductsController@list')->name('products.list');
 });

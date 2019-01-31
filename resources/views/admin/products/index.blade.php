@@ -8,11 +8,11 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <a href="{{ url('/admin/students/create') }}" class="btn btn-success btn-sm" title="Add New Student">
+                        <a href="{{ url('/admin/products/create') }}" class="btn btn-success btn-sm" title="Add New Student">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                      {{--   {!! Form::open(['method' => 'GET', 'url' => '/admin/students', 'class' => 'form-inline pull-right', 'role' => 'search'])  !!}
+                      {{--   {!! Form::open(['method' => 'GET', 'url' => '/admin/products', 'class' => 'form-inline pull-right', 'role' => 'search'])  !!}
                         <div class="form-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                             <span class="input-group-append">
@@ -28,10 +28,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table" id="students">
+                                    <table class="table" id="products">
                                  
                                     </table>
-                                    {{-- <div class="pagination-wrapper"> {!! $students->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                                    {{-- <div class="pagination-wrapper"> {!! $products->appends(['search' => Request::get('search')])->render() !!} </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -45,17 +45,18 @@
 
 @section('js')
     <script type="text/javascript">
-        $('#students').DataTable(
+        $('#products').DataTable(
             {
-                ajax: '{{ route('students.list') }}',
+                ajax: '{{ route('products.list') }}',
                 pageLength: 50,
                 // scrollX: true,
                 columns :[
                     {data: 'id_number', title: 'ID Number'},
-                    {data: 'full_name', title: 'Student Name'},
-                    {data: 'gender', title: 'Gender'},
+                    {data: 'full_name', title: 'Section ID'},
+                    {data: 'gender', title: 'Name'},
+                    {data: 'gender', title: 'Description'},
                     {data: 'id', title: 'Edit', 'mRender': function(data){
-                            return '<a href="students/'+data+'/edit"> <i class="fa fa-edit fa-lg text-muted"></i> </a>'
+                            return '<a href="products/'+data+'/edit"> <i class="fa fa-edit fa-lg text-muted"></i> </a>'
                         }
                     },
                 ]

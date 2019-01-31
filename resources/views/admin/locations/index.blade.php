@@ -30,7 +30,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Short Code</th><th>Name</th><th>Actions</th>
+                                        <th>#</th><th>Name</th><th>Address</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>

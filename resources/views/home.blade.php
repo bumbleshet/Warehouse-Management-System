@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-	Students Information System
+	Warehouse Management
 @endsection
 
 @section('content_header')
@@ -34,8 +34,8 @@
 	    data: {
 			datasets: [{
 		        data: [
-			        {{ $male }},
-			        {{ $female }}
+			        {{ $male = 50}},
+			        {{ $female =50 }}
 			        ],
 			    backgroundColor: ['#a4ea81','#75aaff'],
 		    }],
