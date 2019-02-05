@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Create New Section</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/courses') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/sections') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/courses', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/sections', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin.courses.form', ['formMode' => 'create'])
+                        @include ('admin.sections.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

@@ -39,8 +39,8 @@ class SectionsController extends Controller
      */
     public function create()
     {
-        $locations = Location::get()->pluck('name', 'address');
-
+        $locations = Location::get()->pluck('name', 'id');
+        // dd($locations);
         return view('admin.sections.create', compact('locations'));
     }
 
@@ -100,8 +100,9 @@ class SectionsController extends Controller
     public function edit($id)
     {
         $section = Section::findOrFail($id);
+        $locations = Section::get()->pluck('name', 'id');
 
-        return view('admin.sections.edit', compact('section'));
+        return view('admin.sections.edit', compact('section'))->with('locations', $locations);
     }
 
     /**

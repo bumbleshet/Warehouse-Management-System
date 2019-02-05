@@ -1,6 +1,6 @@
 <?php
 
-use App\Student;
+use App\Product;
 
 return [
 

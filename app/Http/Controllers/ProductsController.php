@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Products, App\Section;
+use App\Product, App\Section;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -21,12 +21,12 @@ class ProductsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $products = Products::where('name', 'LIKE', "%$keyword%")
+            $products = Product::where('name', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
                 ->orWhere('section_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $products = Products::latest()->paginate($perPage);
+            $products = Product::latest()->paginate($perPage);
         }
 
         return view('admin.products.index', compact('products'));
@@ -54,15 +54,15 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_number' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required'
+            'name' => 'required',
+            'description' => 'required',
+            'section_id' => 'required'
         ]);
         $requestData = $request->all();
         
-        Products::create($requestData);
+        Product::create($requestData);
 
-        return redirect('admin/products')->with('flash_message', 'Products added!');
+        return redirect('admin/products')->with('flash_message', 'Product added!');
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $section = Products::findOrFail($id);
+        $section = Product::findOrFail($id);
 
         return view('admin.products.show', compact('section'));
     }
@@ -88,10 +88,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $section = Products::findOrFail($id);
+        $product = Product::findOrFail($id);
         $sections = Section::get()->pluck('name', 'id');
-
-        return view('admin.products.edit', compact('section'))->with('sections', $sections);
+        
+        return view('admin.products.edit', compact('product'))->with('sections', $sections);
     }
 
     /**
@@ -110,10 +110,10 @@ class ProductsController extends Controller
         ]);
         $requestData = $request->all();
         
-        $section = Products::findOrFail($id);
+        $section = Product::findOrFail($id);
         $section->update($requestData);
 
-        return redirect('admin/products')->with('flash_message', 'Products updated!');
+        return redirect('admin/products')->with('flash_message', 'Product updated!');
     }
 
     /**
@@ -125,22 +125,23 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        Products::destroy($id);
+        Product::destroy($id);
 
-        return redirect('admin/products')->with('flash_message', 'Products deleted!');
+        return redirect('admin/products')->with('flash_message', 'Product deleted!');
     }
 
     public function list()
     {
-        $products = Products::get();
+        $products = Product::get();
 
         $return_array = [];
 
-        foreach($products as $section) {
+        foreach($products as $product) {
             $return_array[] = [
-                'id' => $section->id,
-                'name' => $section->name,
-                'description' => $section->description,
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'section_id' => $product->section_id,
             ];
         }
 

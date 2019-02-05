@@ -14,7 +14,7 @@
             </ul>
             <ul class="nav" role="tablist">
                 <li role="presentation">
-                    <a href="{{ route('students.index') }}">
+                    <a href="{{ route('products.index') }}">
                         Students
                     </a>
                 </li>

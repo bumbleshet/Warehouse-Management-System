@@ -51,10 +51,9 @@
                 pageLength: 50,
                 // scrollX: true,
                 columns :[
-                    {data: 'id_number', title: 'ID Number'},
-                    {data: 'full_name', title: 'Section ID'},
-                    {data: 'gender', title: 'Name'},
-                    {data: 'gender', title: 'Description'},
+                    {data: 'name', title: 'Name'},
+                    {data: 'description', title: 'Description'},
+                    {data: 'section_id', title: 'Section ID'},
                     {data: 'id', title: 'Edit', 'mRender': function(data){
                             return '<a href="products/'+data+'/edit"> <i class="fa fa-edit fa-lg text-muted"></i> </a>'
                         }

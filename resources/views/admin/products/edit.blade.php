@@ -7,9 +7,9 @@
 
             <div class="col-md-6 col-md-offset-3">
                 <div class="box box-success">
-                    <div class="box-header">Edit Student {{ $student->full_name }}</div>
+                    <div class="box-header">Edit Product {{ $product->name }}</div>
                     <div class="box-body">
-                        <a href="{{ url('/admin/students') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/products') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
 
                         @if ($errors->any())
                             <ul class="alert alert-danger">
@@ -19,14 +19,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($student, [
+                        {!! Form::model($product, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/students', $student->id],
+                            'url' => ['/admin/products', $product->id],
                             'class' => '',
                             'files' => true
                         ]) !!}
 
-                        @include ('admin.students.form', ['formMode' => 'edit'])
+                        @include ('admin.products.form', ['formMode' => 'edit'])
 
                         {!! Form::close() !!}
 

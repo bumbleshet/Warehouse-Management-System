@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Create New Department</div>
+                    <div class="card-header">Create New Location</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/departments') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/locations') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/departments', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/locations', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin.departments.form', ['formMode' => 'create'])
+                        @include ('admin.locations.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

@@ -7,9 +7,9 @@
 
             <div class="col-md-6 col-md-offset-3">
                 <div class="box box-success">
-                    <div class="box-header">Create New Student</div>
+                    <div class="box-header">Create New Product</div>
                     <div class="box-body">
-                        <a href="{{ url('/admin/students') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/products') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/students', 'class' => '', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/products', 'class' => '', 'files' => true]) !!}
 
-                        @include ('admin.students.form', ['formMode' => 'create'])
+                        @include ('admin.products.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

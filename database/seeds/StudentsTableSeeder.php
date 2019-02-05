@@ -1,9 +1,9 @@
 <?php
 
-use App\Student;
+use App\Product;
 use Illuminate\Database\Seeder;
 
-class StudentsTableSeeder extends Seeder
+class ProductsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,19 +12,19 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        // $faker = Faker\Factory::create();
         
-        for ($i=0; $i < 1000; $i++) { 
+        // for ($i=0; $i < 1000; $i++) { 
         	
-        	$gender = $faker->randomElement(['male', 'female']);
+        // 	$gender = $faker->randomElement(['male', 'female']);
 
-    		$student = new Student;
-    		$student->id_number = $faker->unique()->randomNumber;
-    		$student->first_name = $faker->firstName($gender);
-    		$student->last_name = $faker->lastName;
-    		$student->gender = $gender;
-    		$student->course_id = rand(1,3);
-	        $student->save();
-    	}
+    	// 	$student = new Product;
+    	// 	$student->id_number = $faker->unique()->randomNumber;
+    	// 	$student->first_name = $faker->firstName($gender);
+    	// 	$student->last_name = $faker->lastName;
+    	// 	$student->gender = $gender;
+    	// 	$student->course_id = rand(1,3);
+	    //     $student->save();
+    	// }
     }
 }
