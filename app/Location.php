@@ -27,9 +27,9 @@ class Location extends Model
      */
     protected $fillable = ['name', 'address'];
 
-    public function courses()
+    public function sections()
     {
-        return $this->hasMany('App\Course');
+        return $this->hasMany('App\Section');
     }
 
 }

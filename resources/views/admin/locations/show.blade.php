@@ -14,7 +14,7 @@
                         <a href="{{ url('/admin/locations/' . $location->id . '/edit') }}" title="Edit Location"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['admin/locations', $location->id],
+                            'url' => ['admin/locationss', $location->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <table class="table table-responsive">
-                    @foreach ($location->sections as $section)
+                <!-- dd($location->sections) -->
+                @foreach ($location->sections as $section)
                             {{-- <td>{{ $section->name }} --}}
                                 {{-- <ul> --}}
                                     @foreach ($section->products as $product)
@@ -66,7 +67,7 @@
                                 <td>{{ $product->name }}</td>
                         </tr>
                             @endforeach
-                    @endforeach --}}
+                    @endforeach --}} 
                 </table>
             </div>
         </div>
