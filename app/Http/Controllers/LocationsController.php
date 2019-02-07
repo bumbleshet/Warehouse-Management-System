@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\location;
+use App\Location;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
@@ -21,11 +21,11 @@ class LocationsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $locations = location::where('short_code', 'LIKE', "%$keyword%")
+            $locations = Location::where('short_code', 'LIKE', "%$keyword%")
                 ->orWhere('name', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $locations = location::latest()->paginate($perPage);
+            $locations = Location::latest()->paginate($perPage);
         }
 
         return view('admin.locations.index', compact('locations'));
@@ -56,7 +56,7 @@ class LocationsController extends Controller
 		]);
         $requestData = $request->all();
         
-        location::create($requestData);
+        Location::create($requestData);
 
         return redirect('admin/locations')->with('flash_message', 'location added!');
     }
@@ -70,7 +70,7 @@ class LocationsController extends Controller
      */
     public function show($id)
     {
-        $location = location::findOrFail($id);
+        $location = Location::findOrFail($id);
 
         // return $location;
         return view('admin.locations.show', compact('location'));
@@ -85,7 +85,7 @@ class LocationsController extends Controller
      */
     public function edit($id)
     {
-        $location = location::findOrFail($id);
+        $location = Location::findOrFail($id);
 
         return view('admin.locations.edit', compact('location'));
     }
@@ -106,7 +106,7 @@ class LocationsController extends Controller
 		]);
         $requestData = $request->all();
         
-        $location = location::findOrFail($id);
+        $location = Location::findOrFail($id);
         $location->update($requestData);
 
         return redirect('admin/locations')->with('flash_message', 'location updated!');
@@ -121,7 +121,7 @@ class LocationsController extends Controller
      */
     public function destroy($id)
     {
-        location::destroy($id);
+        Location::destroy($id);
 
         return redirect('admin/locations')->with('flash_message', 'location deleted!');
     }
